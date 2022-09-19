@@ -1,0 +1,66 @@
+.keyboard {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 1px 20px 0 rgb(0 0 0 / 11%);
+}
+.component-button-panel {
+  display: grid;
+  width: 100%;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: row;
+  .date {
+    text-align: center;
+    line-height: 120px;
+  }
+  > View {
+    text-align: center;
+    line-height: 120px;
+    // background: skyblue;
+    font-size: 34px;
+    &:active{
+      background-color: aliceblue;
+    }
+    color: black;
+    position: relative;
+    // border-top: 1px solid red;
+    // border-right: 1px solid red;
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: scaleY(0.5);
+      border-top-width: 1px;
+      border-top-style: solid;
+      border-top-color: rgb(214, 228, 239);
+      box-sizing: border-box;
+      transform-origin: 0 0;
+    }
+    &::before {
+      position: absolute;
+      content: "";
+      right: 0;
+      height: 200%;
+      transform: scaleY(0.5);
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-right-color: rgb(214, 228, 239);
+      box-sizing: border-box;
+      transform-origin: 0 0;
+    }
+  }
+}
+
+.display {
+  padding: 4px 20px;
+  .number {
+    margin-right: 40px;
+    font-size: 58px;
+    margin-left: auto;
+  }
+}

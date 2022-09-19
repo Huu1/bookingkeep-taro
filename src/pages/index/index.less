@@ -1,0 +1,96 @@
+@import '../../style/base.less';
+
+.fix-top {
+  padding: 0 20px;
+  padding-top: 20px;
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .date-button {
+      padding: 0 10px;
+      width: auto;
+      min-width: 90px;
+      max-width: 200px;
+      height: 40px;
+      font-size: 24px;
+      line-height: 38px;
+      border-color: black;
+      display: flex;
+      .at-button__text {
+        display: flex;
+        .iconfont {
+          font-size: 34px;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+  .payNum {
+    // padding: 6px 0 22px 0;
+    height: 94px;
+    line-height: 80px;
+    font-size: 26px;
+    Text:first-child {
+      font-size: 46px;
+      font-weight: bold;
+    }
+  }
+}
+
+.custom-date-button {
+
+}
+
+.bill-item-out {
+  background-color: white;
+  .item-extra__info {
+    color: @expend;
+    font-size: 38px;
+    font-weight: 500;
+  }
+}
+
+.bill-item-in {
+  background-color: white;
+  .item-extra__info {
+    color: @income;
+    font-size: 38px;
+    font-weight: 500;
+  }
+}
+
+.custom-listitem {
+  padding: 20px 20px 10px;
+  overflow: hidden;
+  font-size: 26px;
+  background-color: white;
+  color: @text-primary;
+  .item-extra__info {
+    font-size: 26px;
+    color: @text-primary;
+  }
+  .at-list__item-icon {
+    margin-right: 20px;
+  }
+  .item-content__info-title {
+    font-size: 26px;
+  }
+}
+
+.custom-accordion {
+  margin-bottom: 20px;
+  background-color: white;
+  .at-list__item-icon {
+    margin-right: 20px;
+  }
+  .at-accordion__info__title {
+    font-size: 26px;
+    color: @text-primary;
+  }
+  .at-accordion__header_content {
+    flex: 3.5;
+    font-size: 26px;
+    margin-right: 30px;
+  }
+}

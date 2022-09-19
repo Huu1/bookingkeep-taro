@@ -1,0 +1,61 @@
+@import '../../style/base.less';
+.bill-header {
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: @bg-secound;
+  .iconfont {
+    font-size: 54px;
+    background-color: #78A4FA;
+    border-radius: 50%;
+    padding: 10px;
+  }
+  .number {
+    font-size: 46px;
+  }
+  .text {
+    margin: 0 18px;
+  }
+
+}
+.bill-atlist {
+  background-color: @bg-primary;
+}
+.bill-custom-item {
+  background-color: white;
+  .at-list__item-extra {
+    max-width: 500px;
+  }
+  .item-extra__info {
+    text-align: right;
+  }
+}
+.bill-custom-date {
+  margin-top: 20px;
+}
+
+.bill-detail-bottom {
+  position: fixed;
+  bottom: 30px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+
+  justify-content: space-between;
+
+  button:first-child {
+    background-color: @income;
+  }
+  button:last-child {
+    background-color: @expend;
+  }
+  .bill-detail-btn {
+    border-radius: 999px;
+    border: none;
+    width: 200px;
+    line-height: 80px;
+    color: white;
+  }
+}

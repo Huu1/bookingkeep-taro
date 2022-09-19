@@ -1,0 +1,66 @@
+@import '../../style/base.less';
+@rarius:12px;
+.record-header {
+  > View {
+    display: flex;
+    justify-content: center;
+    padding: 4px 80px;
+    border: 1px solid #999;
+    font-size: 26px;
+  }
+  > View:first-child {
+    border-right: none;
+    border-top-left-radius: @rarius;
+    border-bottom-left-radius: @rarius;
+  }
+  > View:last-child {
+    border-top-right-radius: @rarius;
+    border-bottom-right-radius: @rarius
+  }
+  .checked {
+    background-color: #ef817e;
+    color: white;
+  }
+}
+
+.record-page {
+  .category {
+    .custom-swiper {
+      .category-page {
+        display: grid;
+        grid-template-columns:repeat(4,1fr) ;
+        grid-template-rows: repeat(3,1fr);
+        .category-item {
+          padding: 20px;
+          .icon-wrap {
+            border-radius: 50%;
+            padding: 15px;
+            margin-bottom: 12px;
+            background-color: #f2f4f5;
+            > View:first-child{
+              font-size: 68px;
+              line-height: 68px;
+            }
+          }
+        }
+        .category-ietm-checked {
+          .icon-wrap {
+            background-color: @app-primary;
+          }
+        }
+      }
+    }
+  }
+  .remark {
+    // border-top: 1px solid #c9c9c9;
+    padding: 20px;
+
+    padding-left: 40px;
+    margin-left: 0;
+    .at-input__title {
+      width: 70px;
+
+      font-size: 29px;
+    }
+  }
+}
