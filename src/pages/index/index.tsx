@@ -1,5 +1,5 @@
 import Taro, { useDidShow } from "@tarojs/taro";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { View } from "@tarojs/components";
 import { useRequest, useUpdateEffect } from "ahooks";
 import { AtListItem } from "taro-ui";
@@ -19,6 +19,7 @@ export const dayFormat = "YYYY-MM-DD";
 export default function Index() {
   const [dateType, setDatetype] = useState(0);
   const [date, setDate] = useState(dayjs(new Date()).format(monthFormat));
+  const [isOpenId,setIsopenId] =useState<string>('')
 
   useDidShow(() => {
     run();
@@ -31,7 +32,7 @@ export default function Index() {
     runList();
   }, [dateType, date]);
 
-  const { loading, data: billSummary=[], run } = useRequest(() => getStatement({ dateType, date }), {
+  const { loading, data: billSummary = [], run } = useRequest(() => getStatement({ dateType, date }), {
     refreshDeps: [dateType, date],
     manual: true
   });
@@ -48,6 +49,17 @@ export default function Index() {
     setDate(newDate);
   };
 
+  const reload = useCallback(() => {
+    run();
+    runList();
+  }, [run, runList,])
+
+  const comProps={
+    isOpenId,
+    setIsopenId,
+    data:dateSummary,
+    reload
+  }
 
   return (
     <>
@@ -62,7 +74,7 @@ export default function Index() {
       </NavBar>
       <View className='home-page'>
         {
-          dateType === 0 ? <MonthList data={dateSummary} /> : <YearList data={dateSummary} />
+          dateType === 0 ? <MonthList {...comProps} /> : <YearList {...comProps} />
         }
       </View>
       <CustomTabBar />

@@ -4,7 +4,7 @@ import { Button, View } from "@tarojs/components";
 import { useRequest } from "ahooks";
 import { AtList, AtListItem } from "taro-ui";
 import NavBar from "../../components/topbar";
-import { getBillDetail } from "./service";
+import { deleteBill, getBillDetail } from "./service";
 import "./index.less";
 import { date_Format, fomatStrDate } from "../../util";
 
@@ -15,16 +15,54 @@ export default function Index() {
 
   useDidShow(() => {
     run();
+    Taro.showLoading({
+      title:''
+    })
   })
 
   const { loading, data, run }: any = useRequest(() => getBillDetail(getCurrentInstance().router?.params.id), {
-    manual: true
+    manual: true,
+    onFinally(){
+      setTimeout(() => {
+        Taro.hideLoading();
+      }, 100);
+    }
   });
 
   const toNewPage = () => {
     Taro.navigateTo({ url: '/pages/record/index' })
   }
 
+  const onDelHandler =()=>{
+
+    Taro.showModal({
+      title: '删除',
+      content: '确认要删除该账单吗?',
+      success: function (res) {
+        if (res.confirm) {
+          Taro.showLoading();
+          deleteBill(data.id).then(r=>{
+            Taro.hideLoading();
+            Taro.showToast({
+              title: '删除成功',
+              icon: 'success',
+              duration: 2000
+            }).then(()=>{
+              Taro.switchTab({
+                url:'/pages/index/index'
+              })
+            })
+          }).catch(error=>{
+            Taro.showToast({
+              title: error?.message || error,
+              icon: 'none',
+              duration: 2000
+            })
+          })
+        }
+      }
+    })
+  }
 
   return (
     <>
@@ -32,7 +70,7 @@ export default function Index() {
       <View className='home-page'>
         <View className='bill-header'>
           <View className={`iconfont ${data?.category?.icon}`} />
-          <View className='text'>餐饮</View>
+          <View className='text'>{data?.category?.name}</View>
           <View className={`number ${data?.category?.type == 0 ? 'expend' : 'income'}`}>{data?.amount}</View>
         </View>
         <AtList className='bill-atlist'>
@@ -60,8 +98,8 @@ export default function Index() {
         </AtList>
       </View>
       <View className='bill-detail-bottom'>
+        <Button className='bill-detail-btn' onClick={onDelHandler}>删除</Button>
         <Button className='bill-detail-btn' onClick={toNewPage}>编辑</Button>
-        <Button className='bill-detail-btn' onClick={toNewPage}>删除</Button>
       </View>
     </>
   );

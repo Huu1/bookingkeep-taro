@@ -6,7 +6,7 @@ import { date_Format } from '../../util';
 import BillDay from './billDay';
 
 export const MonthList = (props) => {
-  const { data=[] } = props;
+  const { data=[] ,reload ,isOpenId ,setIsopenId} = props;
   return <>
     {
       data?.map(item => {
@@ -18,7 +18,7 @@ export const MonthList = (props) => {
             className='custom-listitem mt-12'
             iconInfo={{ size: 17, color: "#999", value: "calendar" }}
           />
-          <BillDay list={item.list} />
+          <BillDay reload={reload} list={item.list} isOpenId={isOpenId} setIsopenId={setIsopenId} />
         </React.Fragment>
       })
     }
@@ -27,7 +27,7 @@ export const MonthList = (props) => {
 }
 
 const YearItem = (props) => {
-  const {item}=props;
+  const {item ,reload ,isOpenId, setIsopenId}=props;
   const [open, setOpen] = React.useState(false);
   return <CustomAtAccordion
     open={open}
@@ -53,16 +53,17 @@ const YearItem = (props) => {
     </View>}
     icon={{ size: 17, color: "#999", value: "calendar" }}
   >
-    <BillDay list={item.list} />
+    <BillDay reload={reload} list={item.list} isOpenId={isOpenId} setIsopenId={setIsopenId} />
   </CustomAtAccordion>
 }
 
 export const YearList = (props) => {
+  const {isOpenId, setIsopenId} =props;
   return <>
     {
      props.data?.map(item => {
         return <React.Fragment key={item.date}>
-          <YearItem  item={item} />
+          <YearItem reload={props.reload} item={item} isOpenId={isOpenId} setIsopenId={setIsopenId} />
         </React.Fragment>
       })
     }
